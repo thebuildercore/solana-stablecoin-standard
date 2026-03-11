@@ -1,0 +1,6 @@
+[fuzz.metrics]
+enabled = true
+
+[[fuzz.programs]]
+address = "5uWfEyXtYh6gFicfTCQjfWhe9ENmggxaf7DG3ffbjK6y"
+program = "../target/deploy/solana_stablecoin_standard.so"

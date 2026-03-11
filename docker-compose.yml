@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # 1. The Audit Trail Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: sss-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: sss_admin
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: sss_audit_trail
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sss_admin -d sss_audit_trail"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. The Webhook & Compliance API
+  api:
+    build:
+      context: ./services/api
+    container_name: sss-api
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://sss_admin:supersecretpassword@postgres:5432/sss_audit_trail
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # 3. The Blockchain Event Listener
+  indexer:
+    build:
+      context: ./services/indexer
+    container_name: sss-indexer
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://sss_admin:supersecretpassword@postgres:5432/sss_audit_trail
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
