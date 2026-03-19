@@ -117,3 +117,6 @@ Run the script using `ts-node`:
 npx ts-node test-mint.ts
 ```
 
+<!-- You might need -->
+<!-- const MINT_ADDRESS = new PublicKey('Apg3cNgKs14s2aqAH9v3qLqv7Vr7T3PF5uLArPYceKQv'); 
+const STABLECOIN_CONFIG_PDA = new PublicKey('GgfqD4DhGe1neWjtahNTh5nSBR95W44nSFW8ymRH2AMo'); -->
