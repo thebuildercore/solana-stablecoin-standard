@@ -1,5 +1,3 @@
-
-
 import { 
     Connection, 
     Keypair, 
@@ -120,9 +118,7 @@ export class SolanaStablecoin {
         );
 
         console.log(`   Linking to Manager Program (PDA: ${configPda.toBase58()})...`);
-        
-        // Note: In your frontend/CLI, you will use Anchor to append the custom Rust instruction here:
-        // tx.add(await program.methods.initialize(options).accounts({...}).instruction());
+    
 
         // 5. Submit to the network
         console.log(`   Sending transaction...`);
