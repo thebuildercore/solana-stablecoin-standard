@@ -16,7 +16,6 @@ The core Anchor programs for the Solana Stablecoin Standard (SSS) have been succ
 * **Manager Program:** [`Euf94rZebzsHaypDMc34QBWs8LBcKcp3vr1xRsL2QidN`](https://explorer.solana.com/address/Euf94rZebzsHaypDMc34QBWs8LBcKcp3vr1xRsL2QidN?cluster=devnet)
 * **Compliance Hook:** [`6ZoCZGV5CtMC2fYrt3GBWB6tmFgUpFYioLAD4JPPMQm4`](https://explorer.solana.com/address/6ZoCZGV5CtMC2fYrt3GBWB6tmFgUpFYioLAD4JPPMQm4?cluster=devnet)
 
-*Note: The Layer 2 off-chain services (Indexer & Webhook API) are architecturally scaffolded in the repository for V2 implementation.*
 
 ##  Table of Contents
 1. [Overview & Motivation](#-overview--motivation)
