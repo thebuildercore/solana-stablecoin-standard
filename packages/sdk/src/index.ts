@@ -4,7 +4,8 @@ import {
     PublicKey, 
     SystemProgram, 
     Transaction, 
-    sendAndConfirmTransaction 
+    sendAndConfirmTransaction,
+    ComputeBudgetProgram
 } from '@solana/web3.js';
 import { 
     TOKEN_2022_PROGRAM_ID, 
@@ -66,6 +67,12 @@ export class SolanaStablecoin {
         // 4. Build the Transaction (Order is strictly enforced by the Solana protocol)
         const tx = new Transaction();
 
+        // 🚀 INJECT PRIORITY FEE FIRST (Validators read top-down)
+        const addPriorityFee = ComputeBudgetProgram.setComputeUnitPrice({ 
+            microLamports: 100000 // 0.0001 SOL priority fee to skip the Devnet line
+        });
+        tx.add(addPriorityFee);
+
         // Step A: Create the raw account with the exact byte size
         tx.add(
             SystemProgram.createAccount({
@@ -119,11 +126,17 @@ export class SolanaStablecoin {
 
         console.log(`   Linking to Manager Program (PDA: ${configPda.toBase58()})...`);
     
-
-        // 5. Submit to the network
-        console.log(`   Sending transaction...`);
-        // const signature = await sendAndConfirmTransaction(connection, tx, [payer, mintKeypair]);
-        // console.log(`✅ Success! Tx: ${signature}`);
+        // 5. Submit to the network (WITH FINALIZED COMMITMENT)
+        console.log(`   Sending transaction... (Waiting for blockchain confirmation)`);
+        
+        const signature = await sendAndConfirmTransaction(
+            connection, 
+            tx, 
+            [payer, mintKeypair],
+            { commitment: "finalized" } // Forces CLI to wait until validators etch it into history
+        );
+        
+        console.log(`✅ Success! Tx Signature: ${signature}`);
 
         return new SolanaStablecoin(connection, mintKeypair.publicKey, managerProgramId);
     }

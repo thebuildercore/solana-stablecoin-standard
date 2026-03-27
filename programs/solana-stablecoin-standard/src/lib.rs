@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("6a9C9EXSpSbXnKDotHu64Mi3UoqbEwniZY5KQZuciu3y");
+declare_id!("Hfm2QXmG3sGUBSrRf1VbCPs6PaHh6wngt1bZXxKWWDdZ");
 
 #[program]
 pub mod solana_stablecoin_standard {

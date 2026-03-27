@@ -7,7 +7,9 @@ import { Connection, Keypair, PublicKey } from '@solana/web3.js';
 import { SolanaStablecoin, Presets } from '@stbr/sss-token'; 
 
 const program = new Command();
-const connection = new Connection("https://api.devnet.solana.com", "confirmed");
+//const connection = new Connection("https://api.devnet.solana.com", "confirmed");
+//const connection = new Connection("https://rpc.ankr.com/solana_devnet", "finalized");
+const connection = new Connection("http://127.0.0.1:8899", "confirmed");
 
 //  REPLACE THESE WITH YOUR REAL DEVNET PROGRAM IDs!
 const MANAGER_PROGRAM_ID = new PublicKey("Euf94rZebzsHaypDMc34QBWs8LBcKcp3vr1xRsL2QidN");
@@ -50,7 +52,7 @@ program
             return;
         }
 
-        spinner.text = `Deploying ${options.name} (${options.symbol}) to Devnet...`;
+        spinner.text = `Deploying ${options.name} (${options.symbol}) to localnet...`;
 
         const stablecoin = await SolanaStablecoin.create(
             connection,

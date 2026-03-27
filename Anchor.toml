@@ -12,6 +12,7 @@ manager = "C1b7pXABHZ8WoJaJKdihqABSWnQxtuWPinhqKD5fwjex"
 [programs.localnet]
 compliance_hook = "6ZoCZGV5CtMC2fYrt3GBWB6tmFgUpFYioLAD4JPPMQm4"
 manager = "Euf94rZebzsHaypDMc34QBWs8LBcKcp3vr1xRsL2QidN"
+solana_stablecoin_standard = "Hfm2QXmG3sGUBSrRf1VbCPs6PaHh6wngt1bZXxKWWDdZ"
 
 [registry]
 url = "https://api.apr.dev"

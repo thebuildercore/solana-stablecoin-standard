@@ -50,7 +50,7 @@ pub struct ManageBlacklist<'info> {
     // SECURITY FIX: Enforce that this Config belongs to the official Manager program!
     
     #[account(
-        owner = "11111111111111111111111111111111".parse::<Pubkey>().unwrap(),
+        owner = "Euf94rZebzsHaypDMc34QBWs8LBcKcp3vr1xRsL2QidN".parse::<Pubkey>().unwrap(),
         constraint = config.blacklister_authority == admin.key() @ ComplianceError::UnauthorizedAdmin
     )]
     pub config: Account<'info, StablecoinConfig>, 
